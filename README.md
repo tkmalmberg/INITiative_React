@@ -1,2 +1,2 @@
 # INITiative_React
- Final repo for my casy studay
+ Final repo (I promise) for my casy study
