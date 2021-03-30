@@ -17,12 +17,12 @@ export default class AppNavbar extends Component {
 
     render() {
         return <Navbar color="dark" dark expand="md">
-            <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
+            <NavbarBrand tag={Link} to="/">INITiative</NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <NavLink href="https://github.com/">GitHub</NavLink>
+                        <NavLink href="https://github.com/tkmalmberg/INITiative_React">GitHub</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>

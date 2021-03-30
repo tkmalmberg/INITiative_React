@@ -40,7 +40,7 @@ class MonsterList extends Component {
         }
 
         const monsterList = monsters.map(monster => {
-            return <tr key={monster.id}>
+            return <tr key={monster.id} id="monster-row">
                 <td style={{whiteSpace: 'nowrap'}}>{monster.name}</td>
                 <td>{monster.hitPoints}</td>
                 <td>{monster.strength}</td>
