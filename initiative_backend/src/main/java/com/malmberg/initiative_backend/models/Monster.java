@@ -1,20 +1,22 @@
 package com.malmberg.initiative_backend.models;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "monster")
 public class Monster extends Creature {
-    @Column(name="name", nullable = false)
+    @Column(name="name")
     private String name;
 
     @Column(name="hitPoints")
     private int hitPoints;
-
-    public Monster() {
-    }
 
     public Monster(String name, int hitPoints) {
         this.name = name;
