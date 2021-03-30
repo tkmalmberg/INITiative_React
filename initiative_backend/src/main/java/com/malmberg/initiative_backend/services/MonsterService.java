@@ -16,7 +16,7 @@ public class MonsterService {
         this.monsterRepository = monsterRepository;
     }
 
-    public Iterable<Monster> getAllMonService() {
+    public Iterable<Monster> getAllMonsters() {
         return monsterRepository.findAll();
     }
 
