@@ -20,7 +20,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping(path = "/monster")
 public class MonsterController {
-    MonsterService monsterService;
+    private final MonsterService monsterService;
     private final Logger log = LoggerFactory.getLogger(MonsterController.class);
 
     public MonsterController(MonsterRepository monsterRepository) {

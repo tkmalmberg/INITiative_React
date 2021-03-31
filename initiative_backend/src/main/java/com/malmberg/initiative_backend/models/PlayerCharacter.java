@@ -1,10 +1,11 @@
 package com.malmberg.initiative_backend.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "player_character")
-public class PlayerCharacter extends Creature {
+public class PlayerCharacter extends Creature implements Serializable {
     @Column(name="name", nullable = false)
     private String name;
 

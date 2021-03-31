@@ -1,12 +1,13 @@
 package com.malmberg.initiative_backend.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "encounter")
-public class Encounter {
+public class Encounter implements Serializable {
     @Id
     @Column(name="eid", nullable=false, length=64)
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
