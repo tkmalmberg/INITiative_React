@@ -1,15 +1,8 @@
 package com.malmberg.initiative_backend.deserialize;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.node.LongNode;
-import com.malmberg.initiative_backend.models.PlayerCharacter;
 import com.malmberg.initiative_backend.models.User;
 import org.springframework.boot.jackson.JsonComponent;
 
@@ -27,6 +20,10 @@ public class UserSerializer extends JsonSerializer<User> {
         jsonGenerator.writeStringField("email", user.getEmail());
         jsonGenerator.writeStringField("pass", user.getPass());
         jsonGenerator.writeBooleanField("admin", user.isAdmin());
+        jsonGenerator.writeObjectField("encounters", user.getEncounters());
+        jsonGenerator.writeObjectField("pcs", user.getPcs());
         jsonGenerator.writeEndObject();
     }
+
+    // TODO Make a method to get a list of Owned PlayerCharacter IDs
 }

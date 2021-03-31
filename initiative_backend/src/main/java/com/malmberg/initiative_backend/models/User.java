@@ -139,4 +139,22 @@ public class User {
         this.encounters = encounters;
     }
 
+    public List<PlayerCharacter> getPcs() {
+        return pcs;
+    }
+
+    public void setPcs(List<PlayerCharacter> pcs) {
+        this.pcs = pcs;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", admin=" + admin +
+                '}';
+    }
 }

@@ -1,3 +1,7 @@
+// For Transparency:
+// Retrofitted code from https://developer.okta.com/blog/2018/07/19/simple-crud-react-and-spring-boot#call-your-spring-boot-api-and-display-the-results
+// This seems to be a very general way of structuring a React Component
+
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
@@ -14,8 +18,6 @@ class MonsterEdit extends Component {
         wisdom: 10,
         charisma: 10
     };
-
-    
 
     constructor(props) {
         super(props);

@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "player_character")
-public class PlayerCharacter extends Creature implements Serializable {
+public class PlayerCharacter extends Creature implements Serializable{
     @Column(name="name", nullable = false)
     private String name;
 

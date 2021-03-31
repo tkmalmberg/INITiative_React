@@ -20,6 +20,14 @@ export default class AppNavbar extends Component {
             <NavbarBrand tag={Link} to="/">INITiative</NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
+                <Nav navbar>
+                    <NavItem>
+                        <NavLink href="/monster/all">Monsters</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="/pc/all">Characters</NavLink>
+                    </NavItem>
+                </Nav>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
                         <NavLink href="https://github.com/tkmalmberg/INITiative_React">GitHub</NavLink>
