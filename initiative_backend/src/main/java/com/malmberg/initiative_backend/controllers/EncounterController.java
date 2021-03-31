@@ -7,12 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(path = "/encounter")
+@RequestMapping(path = "/api")
 public class EncounterController {
     @Autowired
     private EncounterRepository encounterRepository;
 
-    @PostMapping(path = "/add")
+    @PostMapping(path = "encounter/add")
     public @ResponseBody String addNewEncounter(@RequestParam String name) {
         Encounter e = new Encounter();
         e.setName(name);
@@ -20,7 +20,7 @@ public class EncounterController {
         return "Saved";
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "encounter/all")
     public @ResponseBody Iterable<Encounter> getAllEncounters() {
         return encounterRepository.findAll();
     }

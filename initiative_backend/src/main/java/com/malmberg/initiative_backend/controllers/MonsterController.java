@@ -18,7 +18,7 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path = "/monster")
+@RequestMapping(path = "/api")
 public class MonsterController {
     private final MonsterService monsterService;
     private final Logger log = LoggerFactory.getLogger(MonsterController.class);
@@ -27,27 +27,27 @@ public class MonsterController {
         monsterService = new MonsterService(monsterRepository);
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="monster/all")
     public @ResponseBody Iterable<Monster> getAllMonsters() {
         // This returns a JSON or XML with the users
         return monsterService.getAllMonsters();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "monster/{id}")
     ResponseEntity<?> getMonster(@PathVariable Long id) {
         Optional<Monster> mon = monsterService.getMonster(id);
         return mon.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping(path = "/add")
+    @GetMapping(path = "monster/add")
     ResponseEntity<?> prepareMonster() throws URISyntaxException {
         Monster mon = new Monster();
         Monster result = monsterService.addMonster(mon);
         return ResponseEntity.created(new URI("/monster/" + result.getId())).body(result);
     }
 
-    @PostMapping(path="/add") // Map ONLY POST Requests
+    @PostMapping(path="monster/add") // Map ONLY POST Requests
     ResponseEntity<Monster> createMonster(@Valid @RequestBody Monster mon) throws URISyntaxException {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
@@ -56,14 +56,14 @@ public class MonsterController {
         return ResponseEntity.created(new URI("/monster/" + result.getId())).body(result);
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "monster/{id}")
     ResponseEntity<Monster> updateMonster(@Valid @RequestBody Monster mon) {
         log.info("Request to update Monster: {}", mon);
         Monster result = monsterService.addMonster(mon);
         return ResponseEntity.ok().body(result);
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "monster/{id}")
     public ResponseEntity<?> deleteMonster(@PathVariable Long id) {
         log.info("Request to delete Monster: {}", id);
         monsterService.deleteMonster(id);

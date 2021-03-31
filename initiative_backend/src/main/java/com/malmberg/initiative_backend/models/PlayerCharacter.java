@@ -6,20 +6,20 @@ import java.io.Serializable;
 @Entity
 @Table(name = "player_character")
 public class PlayerCharacter extends Creature implements Serializable{
-    @Column(name="name", nullable = false)
-    private String name;
+    @Column(name="name")
+    private String name = "";
 
     @Column(name="race")
-    private String race;
+    private String race = "";
 
     @Column(name="class")
-    private String className;
+    private String className = "";
 
     @Column(name="hitPoints")
-    private int hitPoints;
+    private int hitPoints = 0;
 
     @Column(name="charLevel")
-    private int level;
+    private int level = 0;
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="uid")

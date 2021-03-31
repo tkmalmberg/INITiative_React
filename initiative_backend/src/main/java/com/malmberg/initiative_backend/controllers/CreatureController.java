@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/creature")
+@RequestMapping(path = "/api")
 public class CreatureController {
     @Autowired
     private CreatureRepository creatureRepository;
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "creature/all")
     public @ResponseBody Iterable<Creature> getAllCreatures() {
         return creatureRepository.findAll();
     }

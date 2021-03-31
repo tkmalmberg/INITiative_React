@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 
 @Controller // This means that this class is a Controller
-@RequestMapping(path="/user") // This means URL's start with /user (after Application path)
+@RequestMapping(path="/api") // This means URL's start with /user (after Application path)
 public class UserController {
     private final UserService userService;
     private final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -26,20 +26,20 @@ public class UserController {
         userService = new UserService(userRepository);
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="user/all")
     public @ResponseBody Iterable<User> getAllUsers() {
         // This returns a JSON or XML with the users
         return userService.getAllUsers();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "user/{id}")
     ResponseEntity<?> getUser(@PathVariable Long id) {
         Optional<User> user = userService.getUser(id);
         return user.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(path="/add") // Map ONLY POST Requests
+    @PostMapping(path="user/add") // Map ONLY POST Requests
     ResponseEntity<User> createUser(@Valid @RequestBody User user) throws URISyntaxException {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
@@ -48,14 +48,14 @@ public class UserController {
         return ResponseEntity.created(new URI("/user/" + result.getId())).body(result);
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "user/{id}")
     ResponseEntity<User> updateUser(@Valid @RequestBody User user) {
         log.info("Request to update User: {}", user);
         User result = userService.addUser(user);
         return ResponseEntity.ok().body(result);
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         log.info("Request to delete User: {}", id);
         userService.deleteUser(id);

@@ -11,20 +11,25 @@ import java.io.IOException;
 public class PCSerializer extends JsonSerializer<PlayerCharacter> {
     @Override
     public void serialize(PlayerCharacter playerCharacter, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeNumberField("id", playerCharacter.getId());
-        jsonGenerator.writeStringField("name", playerCharacter.getName());
-        jsonGenerator.writeStringField("race", playerCharacter.getRace());
-        jsonGenerator.writeStringField("className", playerCharacter.getClassName());
-        jsonGenerator.writeNumberField("hitPoints", playerCharacter.getHitPoints());
-        jsonGenerator.writeNumberField("level", playerCharacter.getLevel());
-        jsonGenerator.writeNumberField("playerId", playerCharacter.getPlayer().getId());
-        jsonGenerator.writeNumberField("strength", playerCharacter.getStrength());
-        jsonGenerator.writeNumberField("constitution", playerCharacter.getConstitution());
-        jsonGenerator.writeNumberField("dexterity", playerCharacter.getDexterity());
-        jsonGenerator.writeNumberField("intelligence", playerCharacter.getIntelligence());
-        jsonGenerator.writeNumberField("wisdom", playerCharacter.getWisdom());
-        jsonGenerator.writeNumberField("charisma", playerCharacter.getCharisma());
-        jsonGenerator.writeEndObject();
+        if (playerCharacter != null) {
+            jsonGenerator.writeStartObject();
+            jsonGenerator.writeNumberField("id", playerCharacter.getId());
+            jsonGenerator.writeStringField("name", playerCharacter.getName());
+            jsonGenerator.writeStringField("race", playerCharacter.getRace());
+            jsonGenerator.writeStringField("className", playerCharacter.getClassName());
+            jsonGenerator.writeNumberField("hitPoints", playerCharacter.getHitPoints());
+            jsonGenerator.writeNumberField("level", playerCharacter.getLevel());
+            jsonGenerator.writeNumberField("playerId", playerCharacter.getPlayer().getId());
+            jsonGenerator.writeNumberField("strength", playerCharacter.getStrength());
+            jsonGenerator.writeNumberField("constitution", playerCharacter.getConstitution());
+            jsonGenerator.writeNumberField("dexterity", playerCharacter.getDexterity());
+            jsonGenerator.writeNumberField("intelligence", playerCharacter.getIntelligence());
+            jsonGenerator.writeNumberField("wisdom", playerCharacter.getWisdom());
+            jsonGenerator.writeNumberField("charisma", playerCharacter.getCharisma());
+            jsonGenerator.writeEndObject();
+        } else {
+            jsonGenerator.writeNull();
+        }
+
     }
 }

@@ -39,6 +39,10 @@ class PCList extends Component {
     render() {
         const {pcs, isLoading} = this.state;
 
+        // THIS IS TEMPORARY
+        // We will get this from the session soon enough
+        const userId = 1;
+
         if (isLoading) {
             return <p>Loading...</p>
         }
@@ -68,7 +72,7 @@ class PCList extends Component {
                 <AppNavbar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/pc/add">Add New Character</Button>
+                        <Button color="success" tag={Link} to={"/pc/add/" + userId}>Add New Character</Button>
                     </div>
                     <h3>Player Characters</h3>
                     <Table className="mt-4">
