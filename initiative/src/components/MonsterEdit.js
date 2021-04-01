@@ -30,7 +30,7 @@ class MonsterEdit extends Component {
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const monster = await (await fetch(`/monster/${this.props.match.params.id}`)).json();
+            const monster = await (await fetch(`/api/monster/${this.props.match.params.id}`)).json();
             this.setState({item: monster});
         }
     }
@@ -52,7 +52,7 @@ class MonsterEdit extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/monster' + (item.id ? '/' + item.id : ''), {
+        await fetch('/api/monster' + (item.id ? '/' + item.id : ''), {
             method: (item.id) ? 'PUT' : 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -60,11 +60,11 @@ class MonsterEdit extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push('/monster/all');
+        this.props.history.push('/monsters');
     }
 
     async remove(id) {
-        await fetch(`/monster/${id}`, {
+        await fetch(`api/monster/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -129,7 +129,7 @@ class MonsterEdit extends Component {
                     </div>
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/monster/all" 
+                        <Button color="secondary" tag={Link} to="/monsters" 
                                 onClick={() => this.remove(item.id)}>Cancel</Button>
                     </FormGroup>
                 </Form>

@@ -17,7 +17,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping(path = "/api")
 public class MonsterController {
     private final MonsterService monsterService;
@@ -27,7 +27,7 @@ public class MonsterController {
         monsterService = new MonsterService(monsterRepository);
     }
 
-    @GetMapping(path="monster/all")
+    @GetMapping(path="monsters")
     public @ResponseBody Iterable<Monster> getAllMonsters() {
         // This returns a JSON or XML with the users
         return monsterService.getAllMonsters();
@@ -44,7 +44,7 @@ public class MonsterController {
     ResponseEntity<?> prepareMonster() throws URISyntaxException {
         Monster mon = new Monster();
         Monster result = monsterService.addMonster(mon);
-        return ResponseEntity.created(new URI("/monster/" + result.getId())).body(result);
+        return ResponseEntity.created(new URI("/api/monster/" + result.getId())).body(result);
     }
 
     @PostMapping(path="monster/add") // Map ONLY POST Requests
@@ -53,7 +53,7 @@ public class MonsterController {
         // @RequestParam means it is a parameter from the GET or POST request
         log.info("Request to create Monster: {}", mon);
         Monster result = monsterService.addMonster(mon);
-        return ResponseEntity.created(new URI("/monster/" + result.getId())).body(result);
+        return ResponseEntity.created(new URI("/api/monster/" + result.getId())).body(result);
     }
 
     @PutMapping(path = "monster/{id}")

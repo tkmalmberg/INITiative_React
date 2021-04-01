@@ -1,11 +1,17 @@
 package com.malmberg.initiative_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="user")
 public class User {
+    //public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     @Id
     @Column(name="uid", updatable=false, nullable=false)
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -21,16 +27,20 @@ public class User {
     private String email;
 
     @Column(name="password", nullable=false, length=50)
-    private String pass;
+    private @JsonIgnore String pass;
+
+    public void setPass(String pass) {
+        this.pass = pass; //PASSWORD_ENCODER.encode(pass);
+    }
 
     @Column(name="admin", nullable=false)
-    private boolean admin;
+    private @JsonIgnore boolean admin;
 
     @OneToMany(mappedBy="owner")
-    private List<Encounter> encounters = null;
+    private List<Encounter> encounters;
 
-    @OneToMany(mappedBy="player")
-    private List<PlayerCharacter> pcs = null;
+    @OneToMany
+    private List<PlayerCharacter> pcs;
 
     public User() {
         super();
@@ -46,6 +56,19 @@ public class User {
         this.email = email;
         this.pass = pass;
         this.admin = admin;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return admin == user.admin && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && email.equals(user.email) && pass.equals(user.pass);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, pass, admin);
     }
 
     /**
@@ -102,13 +125,6 @@ public class User {
      */
     public String getPass() {
         return pass;
-    }
-
-    /**
-     * @param pass the pass to set
-     */
-    public void setPass(String pass) {
-        this.pass = pass;
     }
 
     /**

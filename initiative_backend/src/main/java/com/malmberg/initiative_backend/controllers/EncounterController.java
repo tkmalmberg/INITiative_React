@@ -20,7 +20,7 @@ public class EncounterController {
         return "Saved";
     }
 
-    @GetMapping(path = "encounter/all")
+    @GetMapping(path = "encounters")
     public @ResponseBody Iterable<Encounter> getAllEncounters() {
         return encounterRepository.findAll();
     }

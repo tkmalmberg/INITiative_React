@@ -13,9 +13,9 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path='/' exact={true} component={Home}/>
-          <Route path='/monster/all' exact={true} component={MonsterList}/>
+          <Route path='/monsters' exact={true} component={MonsterList}/>
           <Route path='/monster/:id' component={MonsterEdit}/>
-          <Route path='/pc/all' exact={true} component={PCList}/>
+          <Route path='/pcs' exact={true} component={PCList}/>
           <Route path='/pc/:id' component={PCEdit}/>
         </Switch>
       </Router>

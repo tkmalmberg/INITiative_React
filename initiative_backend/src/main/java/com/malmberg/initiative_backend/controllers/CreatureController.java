@@ -14,7 +14,7 @@ public class CreatureController {
     @Autowired
     private CreatureRepository creatureRepository;
 
-    @GetMapping(path = "creature/all")
+    @GetMapping(path = "creatures")
     public @ResponseBody Iterable<Creature> getAllCreatures() {
         return creatureRepository.findAll();
     }

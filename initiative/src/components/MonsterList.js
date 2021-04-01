@@ -17,14 +17,13 @@ class MonsterList extends Component {
 
     componentDidMount() {
         this.setState({isLoading: true});
-
-        fetch('/monster/all')
+        fetch('api/monsters/')
             .then(response => response.json())
-            .then(data => this.setState({monsters: data, isLoading: false}))
+            .then(data => this.setState({monsters: Array.from(data), isLoading: false}))
     }
 
     async remove(id) {
-        await fetch(`/monster/${id}`, {
+        await fetch(`api/monster/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -67,7 +66,7 @@ class MonsterList extends Component {
                 <AppNavbar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/monster/add">Add New Monster</Button>
+                        <Button color="success" tag={Link} to="monster/add">Add New Monster</Button>
                     </div>
                     <h3>Monsters</h3>
                     <Table className="mt-4">

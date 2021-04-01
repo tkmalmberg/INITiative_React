@@ -19,7 +19,6 @@ public class PCSerializer extends JsonSerializer<PlayerCharacter> {
             jsonGenerator.writeStringField("className", playerCharacter.getClassName());
             jsonGenerator.writeNumberField("hitPoints", playerCharacter.getHitPoints());
             jsonGenerator.writeNumberField("level", playerCharacter.getLevel());
-            jsonGenerator.writeNumberField("playerId", playerCharacter.getPlayer().getId());
             jsonGenerator.writeNumberField("strength", playerCharacter.getStrength());
             jsonGenerator.writeNumberField("constitution", playerCharacter.getConstitution());
             jsonGenerator.writeNumberField("dexterity", playerCharacter.getDexterity());

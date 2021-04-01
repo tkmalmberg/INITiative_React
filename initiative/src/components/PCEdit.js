@@ -33,7 +33,7 @@ class PCEdit extends Component {
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const pc = await (await fetch(`/pc/${this.props.match.params.id}`)).json();
+            const pc = await (await fetch(`/api/pc/${this.props.match.params.id}`)).json();
             this.setState({item: pc});
         }
     }
@@ -55,7 +55,7 @@ class PCEdit extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/pc' + (item.id ? '/' + item.id : ''), {
+        await fetch('/api/pc' + (item.id ? '/' + item.id : ''), {
             method: (item.id) ? 'PUT' : 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -63,11 +63,11 @@ class PCEdit extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push('/pc/all');
+        this.props.history.push('/pcs');
     }
 
     async remove(id) {
-        await fetch(`/pc/${id}`, {
+        await fetch(`api/pc/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -142,7 +142,7 @@ class PCEdit extends Component {
                     </div>
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/pc/all" 
+                        <Button color="secondary" tag={Link} to="/pcs" 
                                 onClick={() => this.remove(item.id)}>Cancel</Button>
                     </FormGroup>
                 </Form>

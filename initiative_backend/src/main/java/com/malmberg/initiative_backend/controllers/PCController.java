@@ -30,7 +30,7 @@ public class PCController {
         userService = new UserService(userRepository);
     }
 
-    @GetMapping(path="pc/all")
+    @GetMapping(path="pcs")
     public @ResponseBody Iterable<PlayerCharacter> getAllPCs() {
         // This returns a JSON or XML with the PC's
         return pcService.getAllPCs();
@@ -44,11 +44,19 @@ public class PCController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping(path = "pc/add/{id}")
-    ResponseEntity<?> preparePC(@RequestParam Long id) throws URISyntaxException {
-        User user = userService.getUser(id).get();
-        PlayerCharacter result = pcService.addPC(new PlayerCharacter());
-        return ResponseEntity.created(new URI("/pc/" + result.getId())).body(result);
+//    // TODO put this in the User Controller. It should add the Character to the PC list
+//    @GetMapping(path = "pc/add/{id}")
+//    ResponseEntity<?> preparePC(@RequestParam Long id) throws URISyntaxException {
+//        User user = userService.getUser(id).get();
+//        PlayerCharacter result = pcService.addPC(new PlayerCharacter());
+//        return ResponseEntity.created(new URI("api/pc/" + result.getId())).body(result);
+//    }
+
+    @GetMapping(path = "pc/add")
+    ResponseEntity<?> preparePC() throws URISyntaxException {
+        PlayerCharacter pc = new PlayerCharacter();
+        PlayerCharacter result = pcService.addPC(pc);
+        return ResponseEntity.created(new URI("/api/pc/" + result.getId())).body(result);
     }
 
 
@@ -56,12 +64,12 @@ public class PCController {
     ResponseEntity<PlayerCharacter> createPC(@Valid @RequestBody PlayerCharacter pc) throws URISyntaxException {
         log.info("Request to create Player Character: {}", pc);
         PlayerCharacter result = pcService.addPC(pc);
-        return ResponseEntity.created(new URI("/pc/" + result.getId())).body(result);
+        return ResponseEntity.created(new URI("api/pc/" + result.getId())).body(result);
     }
 
     @PutMapping(path = "pc/{id}")
     ResponseEntity<PlayerCharacter> updatePC(@Valid @RequestBody PlayerCharacter pc) {
-        log.info("Request to create Player Character: {}", pc);
+        log.info("Request to update Player Character: {}", pc);
         PlayerCharacter result = pcService.addPC(pc);
         return ResponseEntity.ok().body(result);
     }

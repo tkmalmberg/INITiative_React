@@ -21,20 +21,17 @@ public class PlayerCharacter extends Creature implements Serializable{
     @Column(name="charLevel")
     private int level = 0;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="uid")
-    private User player;
+
 
     public PlayerCharacter() {
     }
 
-    public PlayerCharacter(String name, String race, String className, int hitPoints, int level, User player) {
+    public PlayerCharacter(String name, String race, String className, int hitPoints, int level) {
         this.name = name;
         this.race = race;
         this.className = className;
         this.hitPoints = hitPoints;
         this.level = level;
-        this.player = player;
     }
 
     public String getName() {
@@ -77,11 +74,4 @@ public class PlayerCharacter extends Creature implements Serializable{
         this.level = level;
     }
 
-    public User getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(User player) {
-        this.player = player;
-    }
 }
