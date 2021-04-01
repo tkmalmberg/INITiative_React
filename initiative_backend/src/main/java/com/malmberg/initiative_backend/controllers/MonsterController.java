@@ -29,7 +29,6 @@ public class MonsterController {
 
     @GetMapping(path="monsters")
     public @ResponseBody Iterable<Monster> getAllMonsters() {
-        // This returns a JSON or XML with the users
         return monsterService.getAllMonsters();
     }
 

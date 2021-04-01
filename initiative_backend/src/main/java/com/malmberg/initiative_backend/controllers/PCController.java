@@ -32,7 +32,6 @@ public class PCController {
 
     @GetMapping(path="pcs")
     public @ResponseBody Iterable<PlayerCharacter> getAllPCs() {
-        // This returns a JSON or XML with the PC's
         return pcService.getAllPCs();
     }
 
@@ -43,14 +42,6 @@ public class PCController {
         return pc.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
-//    // TODO put this in the User Controller. It should add the Character to the PC list
-//    @GetMapping(path = "pc/add/{id}")
-//    ResponseEntity<?> preparePC(@RequestParam Long id) throws URISyntaxException {
-//        User user = userService.getUser(id).get();
-//        PlayerCharacter result = pcService.addPC(new PlayerCharacter());
-//        return ResponseEntity.created(new URI("api/pc/" + result.getId())).body(result);
-//    }
 
     @GetMapping(path = "pc/add")
     ResponseEntity<?> preparePC() throws URISyntaxException {
