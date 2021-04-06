@@ -1,5 +1,8 @@
 # INITiative_React
  Final repo (I promise) for my casy study
+ 
+ ---
+ 
 CRUD USER STORIES:
 1.	As a GUEST, I want to view all the Monsters.
 2.	As a GUEST, I want to be able to sign up as a USER to get more access to the app.
@@ -13,19 +16,28 @@ CRUD USER STORIES:
 5.	As a USER, I want to delete any PLAYER CHARACTERs that I have created.
 6.	As a USER, I want to create custom MONSTERs to add to my encounters.
 7.	As a USER, I want to edit my custom MONSTERs.
-   ..-	Name
-   ..-	Hit Points
-   ..-	Ability Scores
+   *	Name
+   *	Hit Points
+   *	Ability Scores
 8.	As a USER, I want to create an encounter to keep track of combat between PLAYER CHARACTERs and MONSTERs.
 9.	As a USER, I want to edit the encounter that I have created.
-   ..-	Name
-   ..-	Combatants in the encounter
+   *	Name
+   *	Combatants in the encounter
 10.	As a USER, I want to delete the encounters I have created.
 11.	As an ADMIN, I want to view USER details.
-   ..-	First Name
-   ..-	Last Name
-   ..-	Email
-   ..-	Count of ENCOUNTER
-   ..-	Count of PLAYER CHARACTER
+   *	First Name
+   *	Last Name
+   *	Email
+   *	Count of ENCOUNTER
+   *	Count of PLAYER CHARACTER
 12.	As an ADMIN, I want to create USERs.
 13.	As an ADMIN, I want to delete USERs.
+
+COMBAT TRACKER USER STORIES:
+1.	As a USER, when I view my ENCOUNTERs, the combatants are listed on the page.
+2.	As a USER, I want to start the ENCOUNTER to keep track of my combat.
+3.	As a USER, I want the app to highlight which combatant’s turn it is when I click start.
+4.	As a USER, when I click next, I want the tracker to highlight the next combatant in the sequence.
+5.	As a USER, I want the tracker to sort the list of combatants by initiative order.
+6.	As a USER I want all initiative rolls to be made when I click the start button.
+
