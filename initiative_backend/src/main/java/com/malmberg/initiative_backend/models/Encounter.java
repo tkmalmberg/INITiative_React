@@ -20,10 +20,10 @@ public class Encounter implements Serializable {
     @Column(name="name", nullable=false, length=50)
     private String name;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="uid")
-    @JsonBackReference
-    private User owner;
+//    @ManyToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name="uid")
+//    @JsonBackReference
+//    private User owner;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -31,7 +31,6 @@ public class Encounter implements Serializable {
             joinColumns = {@JoinColumn(name = "eid")},
             inverseJoinColumns = {@JoinColumn(name = "creature_id")}
     )
-    @JsonManagedReference
     private Set<Creature> combatants;
 
     public Encounter() {
@@ -53,13 +52,13 @@ public class Encounter implements Serializable {
         this.name = name;
     }
 
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
+//    public User getOwner() {
+//        return owner;
+//    }
+//
+//    public void setOwner(User owner) {
+//        this.owner = owner;
+//    }
 
     public Set<Creature> getCombatants() {
         return combatants;

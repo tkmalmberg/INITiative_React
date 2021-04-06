@@ -75,7 +75,7 @@ class MonsterEdit extends Component {
 
     render() {
         const {item} = this.state;
-        const title = <h2>{item.id ? 'Edit Monster' : 'Add Monster'}</h2>
+        const title = <h2>{item.name ? 'Edit Monster' : 'Add Monster'}</h2>
 
         return <div>
             <AppNavbar/>
@@ -130,7 +130,7 @@ class MonsterEdit extends Component {
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
                         <Button color="secondary" tag={Link} to="/monsters" 
-                                onClick={() => this.remove(item.id)}>Cancel</Button>
+                                onClick={() => item.name ? console.log('cancelled') : this.remove(item.id)}>Cancel</Button>
                     </FormGroup>
                 </Form>
             </Container>

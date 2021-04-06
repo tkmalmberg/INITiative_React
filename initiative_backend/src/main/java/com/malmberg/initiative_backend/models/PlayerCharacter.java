@@ -26,9 +26,9 @@ public class PlayerCharacter extends Creature implements Serializable{
     @Column(name="charLevel")
     private int level = 0;
 
-    @ManyToMany(mappedBy = "pcs")
-    @JsonProperty
-    private List<User> player;
+//    @ManyToMany(mappedBy = "pcs")
+//    @JsonProperty
+//    private List<User> player;
 
     public PlayerCharacter() {
     }
@@ -81,11 +81,11 @@ public class PlayerCharacter extends Creature implements Serializable{
         this.level = level;
     }
 
-    public List<User> getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(List<User> player) {
-        this.player = player;
-    }
+//    public List<User> getPlayer() {
+//        return player;
+//    }
+//
+//    public void setPlayer(List<User> player) {
+//        this.player = player;
+//    }
 }

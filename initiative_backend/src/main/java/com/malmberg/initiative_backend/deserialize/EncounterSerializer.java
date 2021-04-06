@@ -14,7 +14,6 @@ public class EncounterSerializer extends JsonSerializer<Encounter> {
         jsonGenerator.writeStartObject();
         jsonGenerator.writeNumberField("id", encounter.getId());
         jsonGenerator.writeStringField("name", encounter.getName());
-        jsonGenerator.writeNumberField("ownerId", encounter.getOwner().getId());
         jsonGenerator.writeObjectField("combatants", encounter.getCombatants());
         jsonGenerator.writeEndObject();
     }

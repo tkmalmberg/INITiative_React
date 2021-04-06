@@ -43,7 +43,7 @@ class PCList extends Component {
         }
 
         const pcList = pcs.map(pc => {
-            return <tr key={pc.id} id="pc-row">
+            return <tr key={pc.id}>
                 <td style={{whiteSpace: 'nowrap'}}>{pc.name}</td>
                 <td>{pc.race}</td>
                 <td>{pc.className}</td>

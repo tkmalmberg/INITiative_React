@@ -35,7 +35,6 @@ public class Creature implements Serializable {
     protected int charisma = 10;
 
     @ManyToMany(mappedBy = "combatants")
-    @JsonBackReference
     private List<Encounter> encounters;
 
     public Creature() { }

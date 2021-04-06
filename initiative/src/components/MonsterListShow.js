@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavbar';
-import { Link } from 'react-router-dom';
+import { Container, Table } from 'reactstrap';
 
 class MonsterListShow extends Component {
 
     constructor(props) {
         super(props);
         this.state = {monsters: [], isLoading: true};
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -15,6 +14,10 @@ class MonsterListShow extends Component {
         fetch('api/monsters/')
             .then(response => response.json())
             .then(data => this.setState({monsters: Array.from(data), isLoading: false}))
+    }
+
+    handleChange(e) {
+        this.props.onCombatantSelect(e);
     }
 
     render() {
@@ -25,7 +28,7 @@ class MonsterListShow extends Component {
         }
 
         const monsterList = monsters.map(monster => {
-            return <tr key={monster.id} id="monster-row">
+            return <tr key={monster.id} onClick={() => this.handleChange(monster)} id="monster-row">
                 <td style={{whiteSpace: 'nowrap'}}>{monster.name}</td>
                 <td>{monster.hitPoints}</td>
             </tr>
@@ -39,7 +42,7 @@ class MonsterListShow extends Component {
                         <thead>
                             <tr>
                                 <th width="10%">Name</th>
-                                <th width="10%">Hit Points</th>
+                                <th width="10%">HP</th>
                             </tr>
                         </thead>
                         <tbody>

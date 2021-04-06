@@ -39,17 +39,17 @@ public class User implements Serializable {
     @Column(name="admin", nullable=false)
     private @JsonIgnore boolean admin;
 
-    @OneToMany(mappedBy="owner")
-    @JsonManagedReference
-    private List<Encounter> encounters;
+//    @OneToMany(mappedBy="owner")
+//    @JsonManagedReference
+//    private List<Encounter> encounters;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name ="user_pcs",
-            joinColumns = {@JoinColumn(name = "uid")},
-            inverseJoinColumns = {@JoinColumn(name = "creature_id")}
-    )
-    private List<PlayerCharacter> pcs;
+//    @ManyToMany(cascade = {CascadeType.ALL})
+//    @JoinTable(
+//            name ="user_pcs",
+//            joinColumns = {@JoinColumn(name = "uid")},
+//            inverseJoinColumns = {@JoinColumn(name = "creature_id")}
+//    )
+//    private List<PlayerCharacter> pcs;
 
     public User() {
         super();
@@ -150,27 +150,27 @@ public class User implements Serializable {
         this.admin = admin;
     }
 
-    /**
-     * @return the encounters
-     */
-    public List<Encounter> getEncounters() {
-        return encounters;
-    }
-
-    /**
-     * @param encounters the encounters to set
-     */
-    public void setEncounters(List<Encounter> encounters) {
-        this.encounters = encounters;
-    }
-
-    public List<PlayerCharacter> getPcs() {
-        return pcs;
-    }
-
-    public void setPcs(List<PlayerCharacter> pcs) {
-        this.pcs = pcs;
-    }
+//    /**
+//     * @return the encounters
+//     */
+//    public List<Encounter> getEncounters() {
+//        return encounters;
+//    }
+//
+//    /**
+//     * @param encounters the encounters to set
+//     */
+//    public void setEncounters(List<Encounter> encounters) {
+//        this.encounters = encounters;
+//    }
+//
+//    public List<PlayerCharacter> getPcs() {
+//        return pcs;
+//    }
+//
+//    public void setPcs(List<PlayerCharacter> pcs) {
+//        this.pcs = pcs;
+//    }
 
     @Override
     public String toString() {

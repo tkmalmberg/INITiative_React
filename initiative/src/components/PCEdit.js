@@ -9,6 +9,7 @@ import AppNavbar from '../AppNavbar';
 
 class PCEdit extends Component {
     emptyItem = {
+        id: '',
         name: '',
         hitPoints: '',
         race: '',
@@ -78,7 +79,7 @@ class PCEdit extends Component {
 
     render() {
         const {item} = this.state;
-        const title = <h2>{item.id ? 'Edit Character' : 'Add Character'}</h2>
+        const title = <h2>{item.name ? 'Edit Character' : 'Add Character'}</h2>
 
         return <div>
             <AppNavbar/>
@@ -143,7 +144,7 @@ class PCEdit extends Component {
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
                         <Button color="secondary" tag={Link} to="/pcs" 
-                                onClick={() => this.remove(item.id)}>Cancel</Button>
+                                onClick={() => item.name ? console.log('cancelled') : this.remove(item.id)}>Cancel</Button>
                     </FormGroup>
                 </Form>
             </Container>

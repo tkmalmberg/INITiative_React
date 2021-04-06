@@ -35,13 +35,13 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public List<PlayerCharacter> getUserPCs(Long id) {
-        User temp = userRepository.findById(id).get();
-        return temp.getPcs();
-    }
-
-    public void addToUserPCs(PlayerCharacter pc) {
-
-    }
+//    public List<PlayerCharacter> getUserPCs(Long id) {
+//        User temp = userRepository.findById(id).get();
+//        return temp.getPcs();
+//    }
+//
+//    public void addToUserPCs(PlayerCharacter pc) {
+//
+//    }
 
 }

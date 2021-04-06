@@ -45,7 +45,7 @@ public class PCController {
     }
 
     @GetMapping(path = "pc/add")
-    ResponseEntity<?> preparePC(@RequestParam Long id) throws URISyntaxException {
+    ResponseEntity<?> preparePC() throws URISyntaxException {
         PlayerCharacter pc = new PlayerCharacter();
         PlayerCharacter result = pcService.addPC(pc);
 
@@ -57,8 +57,8 @@ public class PCController {
     ResponseEntity<PlayerCharacter> createPC(@Valid @RequestBody PlayerCharacter pc, @RequestParam(name = "id") Long id) throws URISyntaxException {
         log.info("Request to create Player Character: {}", pc);
         PlayerCharacter result = pcService.addPC(pc);
-        User temp = userService.getUser(id).get();
-        temp.getPcs().add(pc);
+//        User temp = userService.getUser(id).get();
+//        temp.getPcs().add(pc);
         return ResponseEntity.created(new URI("api/pc/" + result.getId())).body(result);
     }
 

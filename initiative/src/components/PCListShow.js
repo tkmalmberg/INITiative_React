@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavbar';
-import { Link } from 'react-router-dom';
+import { Container, Table } from 'reactstrap';
 
 class PCListShow extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {pcs: [], isLoading: true, id: 1};
+        this.state = {pcs: [], isLoading: true};
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -15,6 +14,10 @@ class PCListShow extends Component {
         fetch('api/pcs/')
             .then(response => response.json())
             .then(data => this.setState({pcs: Array.from(data), isLoading: false}))
+    }
+
+    handleChange(e) {
+        this.props.onCombatantSelect(e);
     }
 
     render() {
@@ -25,7 +28,7 @@ class PCListShow extends Component {
         }
 
         const pcList = pcs.map(pc => {
-            return <tr key={pc.id} id="pc-row">
+            return <tr key={pc.id} onClick={() => this.handleChange(pc)} id="pc-row">
                 <td style={{whiteSpace: 'nowrap'}}>{pc.name}</td>
                 <td>{pc.race}</td>
                 <td>{pc.className}</td>
