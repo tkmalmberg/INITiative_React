@@ -8,6 +8,7 @@ import com.malmberg.initiative_backend.services.PCService;
 import com.malmberg.initiative_backend.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -44,17 +45,20 @@ public class PCController {
     }
 
     @GetMapping(path = "pc/add")
-    ResponseEntity<?> preparePC() throws URISyntaxException {
+    ResponseEntity<?> preparePC(@RequestParam Long id) throws URISyntaxException {
         PlayerCharacter pc = new PlayerCharacter();
         PlayerCharacter result = pcService.addPC(pc);
+
         return ResponseEntity.created(new URI("/api/pc/" + result.getId())).body(result);
     }
 
 
     @PostMapping(path="pc/add")
-    ResponseEntity<PlayerCharacter> createPC(@Valid @RequestBody PlayerCharacter pc) throws URISyntaxException {
+    ResponseEntity<PlayerCharacter> createPC(@Valid @RequestBody PlayerCharacter pc, @RequestParam(name = "id") Long id) throws URISyntaxException {
         log.info("Request to create Player Character: {}", pc);
         PlayerCharacter result = pcService.addPC(pc);
+        User temp = userService.getUser(id).get();
+        temp.getPcs().add(pc);
         return ResponseEntity.created(new URI("api/pc/" + result.getId())).body(result);
     }
 

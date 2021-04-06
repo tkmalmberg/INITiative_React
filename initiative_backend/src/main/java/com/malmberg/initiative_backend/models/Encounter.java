@@ -1,9 +1,13 @@
 package com.malmberg.initiative_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "encounter")
@@ -18,10 +22,17 @@ public class Encounter implements Serializable {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="uid")
+    @JsonBackReference
     private User owner;
 
-    @OneToMany
-    private List<Creature> combatants = new ArrayList<Creature>();
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name ="encounter_combatants",
+            joinColumns = {@JoinColumn(name = "eid")},
+            inverseJoinColumns = {@JoinColumn(name = "creature_id")}
+    )
+    @JsonManagedReference
+    private Set<Creature> combatants;
 
     public Encounter() {
     }
@@ -50,11 +61,11 @@ public class Encounter implements Serializable {
         this.owner = owner;
     }
 
-    public List<Creature> getCombatants() {
+    public Set<Creature> getCombatants() {
         return combatants;
     }
 
-    public void setCombatants(List<Creature> combatants) {
+    public void setCombatants(Set<Creature> combatants) {
         this.combatants = combatants;
     }
 }

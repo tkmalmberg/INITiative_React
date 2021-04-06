@@ -1,11 +1,13 @@
 package com.malmberg.initiative_backend.services;
 
 import com.malmberg.initiative_backend.models.Monster;
+import com.malmberg.initiative_backend.models.PlayerCharacter;
 import com.malmberg.initiative_backend.models.User;
 import com.malmberg.initiative_backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,6 +33,15 @@ public class UserService {
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public List<PlayerCharacter> getUserPCs(Long id) {
+        User temp = userRepository.findById(id).get();
+        return temp.getPcs();
+    }
+
+    public void addToUserPCs(PlayerCharacter pc) {
+
     }
 
 }

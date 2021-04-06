@@ -1,14 +1,19 @@
 package com.malmberg.initiative_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "creature")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Creature {
+public class Creature implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="eid", updatable=false, nullable=false)
+    @Column(name="creature_id", updatable=false, nullable=false)
     protected Long id;
 
     @Column(name="strength")
@@ -28,6 +33,10 @@ public class Creature {
 
     @Column(name="charisma")
     protected int charisma = 10;
+
+    @ManyToMany(mappedBy = "combatants")
+    @JsonBackReference
+    private List<Encounter> encounters;
 
     public Creature() { }
 

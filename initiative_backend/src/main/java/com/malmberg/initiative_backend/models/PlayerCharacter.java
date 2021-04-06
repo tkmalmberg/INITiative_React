@@ -1,7 +1,12 @@
 package com.malmberg.initiative_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "player_character")
@@ -21,7 +26,9 @@ public class PlayerCharacter extends Creature implements Serializable{
     @Column(name="charLevel")
     private int level = 0;
 
-
+    @ManyToMany(mappedBy = "pcs")
+    @JsonProperty
+    private List<User> player;
 
     public PlayerCharacter() {
     }
@@ -74,4 +81,11 @@ public class PlayerCharacter extends Creature implements Serializable{
         this.level = level;
     }
 
+    public List<User> getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(List<User> player) {
+        this.player = player;
+    }
 }

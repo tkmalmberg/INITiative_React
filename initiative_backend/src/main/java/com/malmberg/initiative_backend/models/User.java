@@ -1,16 +1,19 @@
 package com.malmberg.initiative_backend.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements Serializable {
     //public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     @Id
     @Column(name="uid", updatable=false, nullable=false)
@@ -37,9 +40,15 @@ public class User {
     private @JsonIgnore boolean admin;
 
     @OneToMany(mappedBy="owner")
+    @JsonManagedReference
     private List<Encounter> encounters;
 
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name ="user_pcs",
+            joinColumns = {@JoinColumn(name = "uid")},
+            inverseJoinColumns = {@JoinColumn(name = "creature_id")}
+    )
     private List<PlayerCharacter> pcs;
 
     public User() {

@@ -11,7 +11,7 @@ class PCList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {pcs: [], isLoading: true};
+        this.state = {pcs: [], isLoading: true, id: 1};
         this.remove = this.remove.bind(this);
     }
 

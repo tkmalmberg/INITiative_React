@@ -1,11 +1,11 @@
 package com.malmberg.initiative_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
