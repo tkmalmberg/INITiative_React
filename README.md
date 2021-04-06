@@ -5,11 +5,11 @@ CRUD USER STORIES:
 2.	As a GUEST, I want to be able to sign up as a USER to get more access to the app.
 3.	As a USER, I want to create a PLAYER CHARACTER.
 4.	As a USER, I want to edit the PLAYER CHARACTER that I have created. 
-   ..-	Name
-   ..-	Race
-   ..-	Class
-   ..-	Ability Scores
-   ..-	Hit Points
+   *	Name
+   *	Race
+   *	Class
+   *	Ability Scores
+   *	Hit Points
 5.	As a USER, I want to delete any PLAYER CHARACTERs that I have created.
 6.	As a USER, I want to create custom MONSTERs to add to my encounters.
 7.	As a USER, I want to edit my custom MONSTERs.
