@@ -43,8 +43,11 @@
 
 ---
 
-## Technical Challenges
+## Technical Challenges and How I'm Tackling Them
 
-### 1. JSON Objects
-...I ran into a lot of trouble with getting used to passing JSON objects between my front and back end. One time I called an instance of an Encounter, and it was an infinitely looping JSON file. The relationship between my encounter and user models was circular, resulting in an endless recursive loop! Initially,I learned how to use serializers in order to better maintain the object's data. But I also found that you can use annotations like @JsonManageReference, @JsonBackReference, and @JsonIgnore to do a similar thing just from the model classes.
+### JSON Objects
+I ran into a lot of trouble with getting used to passing JSON objects between my front and back end. One time I called an instance of an Encounter, and it was an infinitely looping JSON file. The relationship between my encounter and user models was circular, resulting in an endless recursive loop! Initially,I learned how to use serializers in order to better maintain the object's data. But I also found that you can use annotations like @JsonManageReference, @JsonBackReference, and @JsonIgnore to do a similar thing just from the model classes.
+
+### Object Management
+I found that my objects behaved strangely when I tried adding them. I believe it was due to the design that the objects have a user owner, but it's not required in the model when creating the user. I decided to hold off on having any user-based functionality before getting a working application that actually does the things I want. An important lesson in just adding one thing at a time
 
