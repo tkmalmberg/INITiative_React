@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Service
 public class PCService {
-    @Autowired
-    PCRepository pcRepository;
 
+    PCRepository pcRepository;
+    @Autowired
     public PCService(PCRepository pcRepository) {
         this.pcRepository = pcRepository;
     }

@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Service
 public class MonsterService {
-    @Autowired
-    private MonsterRepository monsterRepository;
 
+    private MonsterRepository monsterRepository;
+    @Autowired
     public MonsterService(MonsterRepository monsterRepository) {
         this.monsterRepository = monsterRepository;
     }
