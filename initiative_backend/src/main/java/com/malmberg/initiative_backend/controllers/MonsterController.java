@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequestMapping(path = "/api")
 public class MonsterController {
     private final MonsterService monsterService;
-    private final Logger log = LoggerFactory.getLogger(MonsterController.class);
+    private static final Logger log = LoggerFactory.getLogger(MonsterController.class);
 
     public MonsterController(MonsterRepository monsterRepository) {
         monsterService = new MonsterService(monsterRepository);

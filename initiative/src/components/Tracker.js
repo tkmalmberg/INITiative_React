@@ -29,7 +29,9 @@ class Tracker extends Component{
         const combatantList = combatants.map(combatant => {
             return <tr key={combatant.id} id="combatant-row">
                 <td style={{whiteSpace: 'nowrap'}}>{combatant.name}</td>
-                <td>{combatant.hitPoints}</td>
+                <td>
+                    {combatant.hitPoints}
+                </td>
             </tr>
         });
 
