@@ -24,6 +24,7 @@ public class CreatureSerializer extends JsonSerializer<Creature> {
     @Override
     public void serialize(Creature creature, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         if (creature != null) {
+            jsonGenerator.writeStartObject();
             jsonGenerator.writeNumberField("id", creature.getId());
             jsonGenerator.writeNumberField("strength", creature.getStrength());
             jsonGenerator.writeNumberField("constitution", creature.getConstitution());

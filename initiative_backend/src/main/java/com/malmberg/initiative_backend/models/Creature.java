@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "creature")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Creature implements Serializable {
+public class Creature {
 
     /**
      * The ID of the Creature

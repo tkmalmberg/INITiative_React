@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * The Monster class models the monsters in the INITiative application.
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "monster")
-public class Monster extends Creature {
+public class Monster extends Creature implements Serializable {
     /**
      * Name of the Monster
      */
