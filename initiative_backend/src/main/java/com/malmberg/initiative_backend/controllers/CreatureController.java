@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * Controller that manages requests that have to do with Creature models
+ */
 @Controller
 @RequestMapping(path = "/api")
 public class CreatureController {
+
+    //TODO Update the Structure of this to work with a Service
+
     @Autowired
     private CreatureRepository creatureRepository;
 

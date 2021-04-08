@@ -11,31 +11,49 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * The User class models what a user will need for functionality in the
+ * INITiative application
+ */
 @Entity
 @Table(name="user")
 public class User implements Serializable {
     //public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    /**
+     * The ID of the User
+     */
     @Id
     @Column(name="uid", updatable=false, nullable=false)
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    /**
+     * First Name of the User
+     */
     @Column(name="fname", length=50)
     private String firstName;
 
+    /**
+     * Last Name of the User
+     */
     @Column(name="lname", length=50)
     private String lastName;
 
+    /**
+     * Email of the User
+     */
     @Column(name="email", nullable=false, length=50)
     private String email;
 
+    /**
+     * Password of the User
+     */
     @Column(name="password", nullable=false, length=50)
     private @JsonIgnore String pass;
 
-    public void setPass(String pass) {
-        this.pass = pass; //PASSWORD_ENCODER.encode(pass);
-    }
-
+    /**
+     * Admin Status of the User
+     */
     @Column(name="admin", nullable=false)
     private @JsonIgnore boolean admin;
 
@@ -51,11 +69,15 @@ public class User implements Serializable {
 //    )
 //    private List<PlayerCharacter> pcs;
 
+    /**
+     * Empty constructor for the User class
+     */
     public User() {
         super();
     }
 
     /**
+     * Constructor for the User class
      * @param email User's email
      * @param pass User's password
      * @param admin User's admin status
@@ -67,6 +89,12 @@ public class User implements Serializable {
         this.admin = admin;
     }
 
+    /**
+     * Compares instance of a User to another object and determines equality
+     * based on the parameters of the class
+     * @param o The Object to be compared to
+     * @return Boolean of whether the objects are equal or not
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,6 +103,10 @@ public class User implements Serializable {
         return admin == user.admin && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && email.equals(user.email) && pass.equals(user.pass);
     }
 
+    /**
+     * Hash code function for the class
+     * @return HashCode of the User
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, pass, admin);
@@ -137,6 +169,14 @@ public class User implements Serializable {
     }
 
     /**
+     * Sets the Password of the User
+     * @param pass The password you want to set
+     */
+    public void setPass(String pass) {
+        this.pass = pass; //PASSWORD_ENCODER.encode(pass);
+    }
+
+    /**
      * @return the admin
      */
     public boolean isAdmin() {
@@ -172,6 +212,10 @@ public class User implements Serializable {
 //        this.pcs = pcs;
 //    }
 
+    /**
+     * Prints the User as a String
+     * @return Built string of the User class
+     */
     @Override
     public String toString() {
         return "User{" +

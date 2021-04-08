@@ -7,8 +7,20 @@ import com.malmberg.initiative_backend.models.PlayerCharacter;
 import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
+
+/**
+ * Manages the PlayerCharacter JSON object that is sent to the front end
+ */
 @JsonComponent
 public class PCSerializer extends JsonSerializer<PlayerCharacter> {
+
+    /**
+     * Serializes the PlayerCharacter JSON object
+     * @param playerCharacter The PlayerCharacter to be serialized
+     * @param jsonGenerator The JSON Generator that builds the JSON
+     * @param serializerProvider Serializer Provider
+     * @throws IOException Input/Output exception is thrown if there is a NULL field trying to be serialized
+     */
     @Override
     public void serialize(PlayerCharacter playerCharacter, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         if (playerCharacter != null) {
