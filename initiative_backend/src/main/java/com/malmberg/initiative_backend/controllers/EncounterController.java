@@ -6,13 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller that manages requests that have to do with Encounter models
+ */
 @Controller
-@RequestMapping(path = "/encounter")
+@RequestMapping(path = "/api")
 public class EncounterController {
+
+    // TODO Create an encounter service
+    // TODO update this to use ResponseEntity
+
     @Autowired
     private EncounterRepository encounterRepository;
 
-    @PostMapping(path = "/add")
+    /**
+     * Adds a new Encounter to the Database
+     * @param name The name of the encounter
+     * @return
+     */
+    @PostMapping(path = "encounter/add")
     public @ResponseBody String addNewEncounter(@RequestParam String name) {
         Encounter e = new Encounter();
         e.setName(name);
@@ -20,7 +32,7 @@ public class EncounterController {
         return "Saved";
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "encounters")
     public @ResponseBody Iterable<Encounter> getAllEncounters() {
         return encounterRepository.findAll();
     }

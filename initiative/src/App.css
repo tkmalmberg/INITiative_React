@@ -41,6 +41,6 @@
   margin-top: 20px;
 }  
 
-#monster-row:hover {
+#monster-row:hover, #pc-row:hover {
   background-color: #cacaca;
 }

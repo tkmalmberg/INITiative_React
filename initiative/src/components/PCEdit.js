@@ -7,10 +7,14 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from '../AppNavbar';
 
-class MonsterEdit extends Component {
+class PCEdit extends Component {
     emptyItem = {
+        id: '',
         name: '',
         hitPoints: '',
+        race: '',
+        className: '',
+        level: '',
         strength: 10,
         constitution: 10,
         dexterity: 10,
@@ -30,8 +34,8 @@ class MonsterEdit extends Component {
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const monster = await (await fetch(`/api/monster/${this.props.match.params.id}`)).json();
-            this.setState({item: monster});
+            const pc = await (await fetch(`/api/pc/${this.props.match.params.id}`)).json();
+            this.setState({item: pc});
         }
     }
 
@@ -52,7 +56,7 @@ class MonsterEdit extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/api/monster' + (item.id ? '/' + item.id : ''), {
+        await fetch('/api/pc' + (item.id ? '/' + item.id : ''), {
             method: (item.id) ? 'PUT' : 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -60,11 +64,11 @@ class MonsterEdit extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push('/monsters');
+        this.props.history.push('/pcs');
     }
 
     async remove(id) {
-        await fetch(`api/monster/${id}`, {
+        await fetch(`api/pc/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -75,7 +79,7 @@ class MonsterEdit extends Component {
 
     render() {
         const {item} = this.state;
-        const title = <h2>{item.name ? 'Edit Monster' : 'Add Monster'}</h2>
+        const title = <h2>{item.name ? 'Edit Character' : 'Add Character'}</h2>
 
         return <div>
             <AppNavbar/>
@@ -93,6 +97,16 @@ class MonsterEdit extends Component {
                             <Label for="hitPoints">Hit Points</Label>
                             <Input type="number" name="hitPoints" id="hitPoints" value={item.hitPoints || ''}
                                     onChange={this.handleChange} autoComplete="hitPoints"/>
+                        </FormGroup>
+                        <FormGroup className="col-md-2 mb-3">
+                            <Label for="race">Race</Label>
+                            <Input type="text" name="race" id="race" value={item.race || ''}
+                                    onChange={this.handleChange} autoComplete="race"/>
+                        </FormGroup>
+                        <FormGroup className="col-md-2 mb-3">
+                            <Label for="className">Class</Label>
+                            <Input type="text" name="className" id="className" value={item.className || ''}
+                                    onChange={this.handleChange} autoComplete="className"/>
                         </FormGroup>
                     </div>
                     <div className="row">
@@ -129,7 +143,7 @@ class MonsterEdit extends Component {
                     </div>
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/monsters" 
+                        <Button color="secondary" tag={Link} to="/pcs" 
                                 onClick={() => item.name ? console.log('cancelled') : this.remove(item.id)}>Cancel</Button>
                     </FormGroup>
                 </Form>
@@ -137,4 +151,4 @@ class MonsterEdit extends Component {
         </div>
     }
 }
-export default withRouter(MonsterEdit);
+export default withRouter(PCEdit);

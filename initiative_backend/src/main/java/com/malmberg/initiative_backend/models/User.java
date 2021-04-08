@@ -1,42 +1,83 @@
 package com.malmberg.initiative_backend.models;
 
-import javax.persistence.*;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * The User class models what a user will need for functionality in the
+ * INITiative application
+ */
 @Entity
 @Table(name="user")
-public class User {
+public class User implements Serializable {
+    //public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    /**
+     * The ID of the User
+     */
     @Id
     @Column(name="uid", updatable=false, nullable=false)
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    /**
+     * First Name of the User
+     */
     @Column(name="fname", length=50)
     private String firstName;
 
+    /**
+     * Last Name of the User
+     */
     @Column(name="lname", length=50)
     private String lastName;
 
+    /**
+     * Email of the User
+     */
     @Column(name="email", nullable=false, length=50)
     private String email;
 
+    /**
+     * Password of the User
+     */
     @Column(name="password", nullable=false, length=50)
-    private String pass;
+    private @JsonIgnore String pass;
 
+    /**
+     * Admin Status of the User
+     */
     @Column(name="admin", nullable=false)
-    private boolean admin;
+    private @JsonIgnore boolean admin;
 
-    @OneToMany(mappedBy="owner")
-    private List<Encounter> encounters = null;
+//    @OneToMany(mappedBy="owner")
+//    @JsonManagedReference
+//    private List<Encounter> encounters;
 
-    @OneToMany(mappedBy="player")
-    private List<PlayerCharacter> pcs = null;
+//    @ManyToMany(cascade = {CascadeType.ALL})
+//    @JoinTable(
+//            name ="user_pcs",
+//            joinColumns = {@JoinColumn(name = "uid")},
+//            inverseJoinColumns = {@JoinColumn(name = "creature_id")}
+//    )
+//    private List<PlayerCharacter> pcs;
 
+    /**
+     * Empty constructor for the User class
+     */
     public User() {
         super();
     }
 
     /**
+     * Constructor for the User class
      * @param email User's email
      * @param pass User's password
      * @param admin User's admin status
@@ -46,6 +87,29 @@ public class User {
         this.email = email;
         this.pass = pass;
         this.admin = admin;
+    }
+
+    /**
+     * Compares instance of a User to another object and determines equality
+     * based on the parameters of the class
+     * @param o The Object to be compared to
+     * @return Boolean of whether the objects are equal or not
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return admin == user.admin && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && email.equals(user.email) && pass.equals(user.pass);
+    }
+
+    /**
+     * Hash code function for the class
+     * @return HashCode of the User
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, pass, admin);
     }
 
     /**
@@ -105,10 +169,11 @@ public class User {
     }
 
     /**
-     * @param pass the pass to set
+     * Sets the Password of the User
+     * @param pass The password you want to set
      */
     public void setPass(String pass) {
-        this.pass = pass;
+        this.pass = pass; //PASSWORD_ENCODER.encode(pass);
     }
 
     /**
@@ -125,18 +190,40 @@ public class User {
         this.admin = admin;
     }
 
-    /**
-     * @return the encounters
-     */
-    public List<Encounter> getEncounters() {
-        return encounters;
-    }
+//    /**
+//     * @return the encounters
+//     */
+//    public List<Encounter> getEncounters() {
+//        return encounters;
+//    }
+//
+//    /**
+//     * @param encounters the encounters to set
+//     */
+//    public void setEncounters(List<Encounter> encounters) {
+//        this.encounters = encounters;
+//    }
+//
+//    public List<PlayerCharacter> getPcs() {
+//        return pcs;
+//    }
+//
+//    public void setPcs(List<PlayerCharacter> pcs) {
+//        this.pcs = pcs;
+//    }
 
     /**
-     * @param encounters the encounters to set
+     * Prints the User as a String
+     * @return Built string of the User class
      */
-    public void setEncounters(List<Encounter> encounters) {
-        this.encounters = encounters;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", admin=" + admin +
+                '}';
     }
-
 }

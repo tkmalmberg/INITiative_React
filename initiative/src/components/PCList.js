@@ -7,55 +7,56 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from '../AppNavbar';
 import { Link } from 'react-router-dom';
 
-class MonsterList extends Component {
+class PCList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {monsters: [], isLoading: true};
+        this.state = {pcs: [], isLoading: true, id: 1};
         this.remove = this.remove.bind(this);
     }
 
     componentDidMount() {
         this.setState({isLoading: true});
-        fetch('api/monsters/')
+        fetch('api/pcs/')
             .then(response => response.json())
-            .then(data => this.setState({monsters: Array.from(data), isLoading: false}))
+            .then(data => this.setState({pcs: Array.from(data), isLoading: false}))
     }
 
     async remove(id) {
-        await fetch(`api/monster/${id}`, {
+        await fetch(`/api/pc/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         }).then(() => {
-            let updatedMonsters = [...this.state.monsters].filter(i => i.id !== id);
-            this.setState({monsters: updatedMonsters});
+            let updatedpcs = [...this.state.pcs].filter(i => i.id !== id);
+            this.setState({pcs: updatedpcs});
         });
     }
 
     render() {
-        const {monsters, isLoading} = this.state;
+        const {pcs, isLoading} = this.state;
 
         if (isLoading) {
             return <p>Loading...</p>
         }
 
-        const monsterList = monsters.map(monster => {
-            return <tr key={monster.id}>
-                <td style={{whiteSpace: 'nowrap'}}>{monster.name}</td>
-                <td>{monster.hitPoints}</td>
-                <td>{monster.strength}</td>
-                <td>{monster.constitution}</td>
-                <td>{monster.dexterity}</td>
-                <td>{monster.intelligence}</td>
-                <td>{monster.wisdom}</td>
-                <td>{monster.charisma}</td>
+        const pcList = pcs.map(pc => {
+            return <tr key={pc.id}>
+                <td style={{whiteSpace: 'nowrap'}}>{pc.name}</td>
+                <td>{pc.race}</td>
+                <td>{pc.className}</td>
+                <td>{pc.strength}</td>
+                <td>{pc.constitution}</td>
+                <td>{pc.dexterity}</td>
+                <td>{pc.intelligence}</td>
+                <td>{pc.wisdom}</td>
+                <td>{pc.charisma}</td>
                 <td>
                     <ButtonGroup>
-                        <Button size="sm" color="primary" tag={Link} to={"/monster/" + monster.id}>Edit</Button>
-                        <Button size="sm" color="danger" onClick={() => this.remove(monster.id)}>Delete</Button>
+                        <Button size="sm" color="primary" tag={Link} to={"/pc/" + pc.id}>Edit</Button>
+                        <Button size="sm" color="danger" onClick={() => this.remove(pc.id)}>Delete</Button>
                     </ButtonGroup>
                 </td>
             </tr>
@@ -66,14 +67,15 @@ class MonsterList extends Component {
                 <AppNavbar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="monster/add">Add New Monster</Button>
+                        <Button color="success" tag={Link} to={"pc/add"}>Add New Character</Button>
                     </div>
-                    <h3>Monsters</h3>
+                    <h3>Player Characters</h3>
                     <Table className="mt-4">
                         <thead>
                             <tr>
                                 <th width="10%">Name</th>
-                                <th width="10%">Hit Points</th>
+                                <th width="10%">Race</th>
+                                <th width="10%">Class</th>
                                 <th width="5%">STR</th>
                                 <th width="5%">CON</th>
                                 <th width="5%">DEX</th>
@@ -84,7 +86,7 @@ class MonsterList extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {monsterList}
+                            {pcList}
                         </tbody>
                     </Table>
                 </Container>
@@ -93,4 +95,4 @@ class MonsterList extends Component {
     }
 }
 
-export default MonsterList;
+export default PCList;

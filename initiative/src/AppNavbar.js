@@ -20,12 +20,25 @@ export default class AppNavbar extends Component {
             <NavbarBrand tag={Link} to="/">INITiative</NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
+                <Nav navbar>
+                    <NavItem>
+                        <NavLink href="/monsters">Monsters</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="/pcs">Characters</NavLink>
+                    </NavItem>
+                </Nav>
                 <Nav className="ml-auto" navbar>
+                    <NavItem>
+                        <NavLink href={sessionStorage.getItem("currentUser") ? "/user/5" : "/login"}>
+                            {sessionStorage.getItem("currentUser") ? <span>{sessionStorage.getItem("currentUser")}</span> : <span>Sign In</span>}
+                        </NavLink>
+                    </NavItem>
                     <NavItem>
                         <NavLink href="https://github.com/tkmalmberg/INITiative_React">GitHub</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>
-        </Navbar>;
+        </Navbar>
     }
 }
