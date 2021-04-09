@@ -44,6 +44,10 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
     /**
      * Service implementation of userRepository.save()
      * @param user The User you want to add to the database
@@ -59,6 +63,27 @@ public class UserService {
      */
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    /**
+     * Gets a User from the front end and validates that the username and password match in the database
+     * @param userToValidate The user coming from the front end
+     * @return True if the username and password match, return true. Otherwise, return false.
+     */
+    public boolean validateUser(User userToValidate) {
+        User userFromDB = null;
+        Optional<User> tempUserList = this.getUserByEmail(userToValidate.getEmail());
+        if(tempUserList.isPresent()) {
+            userFromDB = tempUserList.get();
+        }
+
+        if(userFromDB != null) {
+            if (userToValidate.getEmail().equals(userFromDB.getEmail()) &&
+                    userToValidate.getPass().equals(userFromDB.getPass())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

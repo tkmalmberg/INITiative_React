@@ -57,6 +57,13 @@ public class UserServiceTest {
     }
 
     @Test
+    public void testGetUserByEmail_ValidEmail() {
+        Mockito.when(userRepository.findUserByEmail(expectedUser.getEmail())).thenReturn(Optional.of(expectedUser));
+        Optional<User> actual = userService.getUserByEmail(expectedUser.getEmail());
+        Assert.assertEquals(Optional.of(expectedUser), actual);
+    }
+
+    @Test
     public void testAddUser() {
         Mockito.when(userRepository.save(expectedUser)).thenReturn(expectedUser);
         User actual = userService.addUser(expectedUser);
@@ -68,5 +75,18 @@ public class UserServiceTest {
         doNothing().when(userRepository).deleteById(expId);
         userService.deleteUser(expId);
         verify(userRepository, times(1)).deleteById(expId);
+    }
+
+    @Test
+    public void testValidateUser_ValidUser() {
+        Mockito.when(userRepository.findUserByEmail(expectedUser.getEmail())).thenReturn(Optional.of(expectedUser));
+        Assert.assertTrue(userService.validateUser(expectedUser));
+    }
+
+    @Test
+    public void testValidateUser_InvalidUser() {
+        User invalidUser = new User("test1", "wrongPass");
+        Mockito.when(userRepository.findUserByEmail(expectedUser.getEmail())).thenReturn(Optional.of(expectedUser));
+        Assert.assertFalse(userService.validateUser(invalidUser));
     }
 }

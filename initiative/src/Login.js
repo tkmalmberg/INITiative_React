@@ -10,13 +10,13 @@ class Login extends Component {
         pass: ''
     }
 
-
     constructor(props) {
         super(props);
         this.state = {
             user: this.emptyUser,
             isLoading: false
         }
+        this.handleChange = this.handleChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
@@ -27,14 +27,14 @@ class Login extends Component {
         const name = target.name;
         let user = {...this.state.user};
         user[name] = value;
-        this.setState({user})
+        this.setState({user});
     }
 
-    async handleLogin(e) {
+    handleLogin(e) {
         e.preventDefault();
         this.setState({isLoading: true})
         const {user} = this.state
-        await fetch('/login', {
+        fetch('/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -43,12 +43,12 @@ class Login extends Component {
             body: JSON.stringify(user),
         }).then(response => response.json())
         .then(data => this.setState({user: data, isLoading: false}))
+        .then(this.props.history.push('/'))
         .catch(e => {
             console.log(e);
             this.setState({...this.state, isLoading: false});
         });
-
-        // sessionStorage.setItem("currentUser", "Tyler");
+        sessionStorage.setItem("currentUser", JSON.stringify(this.state.user));
     }
 
     handleLogout(e) {
@@ -75,12 +75,12 @@ class Login extends Component {
                                 <FormGroup className="col-md-4 mb-3">
                                     <Label for="email">Email</Label>
                                     <Input type="text" name="email" id="email"
-                                            value={user.email || ''} onChange={this.handleChange}/>
+                                            defautlValue={user.email || ''} onChange={this.handleChange}/>
                                 </FormGroup>
                                 <FormGroup className="col-md-4 mb-3">
                                     <Label for="pass">Password</Label>
                                     <Input type="password" name="pass" id="pass"
-                                            value={user.pass || ''} onChange={this.handleChange}/>
+                                            defaultValue={user.pass || ''} onChange={this.handleChange}/>
                                 </FormGroup>
                                 <FormGroup className="col-md-4 mb-3">
                                     <Button color="primary" type="submit">Login</Button>{' '}
