@@ -16,6 +16,8 @@ export default class AppNavbar extends Component {
     }
 
     render() {
+        const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+
         return <Navbar color="dark" dark expand="md">
             <NavbarBrand tag={Link} to="/">INITiative</NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
@@ -30,8 +32,13 @@ export default class AppNavbar extends Component {
                 </Nav>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <NavLink href={sessionStorage.getItem("currentUser") ? "/user/5" : "/login"}>
-                            {sessionStorage.getItem("currentUser") ? <span>{sessionStorage.getItem("currentUser")}</span> : <span>Sign In</span>}
+                        <NavLink href={"/register"}>
+                            {currentUser ? <span>{currentUser.email}</span> : <span>Register</span>}
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href={"/login"}>
+                            {currentUser ? <span>Logout</span> : <span>Sign In</span>}
                         </NavLink>
                     </NavItem>
                     <NavItem>

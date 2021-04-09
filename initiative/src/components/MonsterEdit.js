@@ -26,6 +26,7 @@ class MonsterEdit extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.remove = this.remove.bind(this);
     }
 
     async componentDidMount() {
@@ -35,10 +36,6 @@ class MonsterEdit extends Component {
         }
     }
 
-    // Not entirely sure what this does haha
-    // we'll see I guess
-    // UPDATE -> Even after running and messing around, still don't know what it does.
-    //           I'm going to leave it here, because it seems important.
     handleChange(event) {
         const target = event.target;
         const value = target.value;
@@ -64,13 +61,14 @@ class MonsterEdit extends Component {
     }
 
     async remove(id) {
-        await fetch(`api/monster/${id}`, {
+        await fetch(`/api/monster/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
-        })
+        });
+        this.props.history.push('/monsters');
     }
 
     render() {
@@ -129,8 +127,14 @@ class MonsterEdit extends Component {
                     </div>
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/monsters" 
+                        <Button className="float-right" color="danger"  
+                                onClick={() => this.remove(item.id)}>Delete</Button>{' '}
+                        
+                        {!item.name ? 
+                            <Button color="secondary" tag={Link} to="/monsters" 
                                 onClick={() => item.name ? console.log('cancelled') : this.remove(item.id)}>Cancel</Button>
+                            : <div></div>}
+                        
                     </FormGroup>
                 </Form>
             </Container>

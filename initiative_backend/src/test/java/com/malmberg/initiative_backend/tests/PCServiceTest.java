@@ -1,12 +1,14 @@
 package com.malmberg.initiative_backend.tests;
 
 import com.malmberg.initiative_backend.models.PlayerCharacter;
+import com.malmberg.initiative_backend.repositories.PCRepository;
 import com.malmberg.initiative_backend.services.PCService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,8 +25,11 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class PCServiceTest {
 
-    @Autowired
-    private PCService pcService = mock(PCService.class);
+    @Mock
+    private PCRepository pcRepository;
+
+    @InjectMocks
+    private PCService pcService;
 
     private final PlayerCharacter expPC = new PlayerCharacter("test", "test", "test", 0, 0);
     private final Long expId = 1L;
@@ -40,30 +45,30 @@ public class PCServiceTest {
 
     @Test
     public void testGetAllPCs() {
-        Mockito.when(pcService.getAllPCs()).thenReturn(expIterable);
+        Mockito.when(pcRepository.findAll()).thenReturn(expIterable);
         Iterable<PlayerCharacter> actual = pcService.getAllPCs();
         Assert.assertEquals(expIterable, actual);
     }
 
     @Test
     public void testGetPC() {
-        Mockito.when(pcService.getPC(expId)).thenReturn(Optional.of(expPC));
+        Mockito.when(pcRepository.findById(expId)).thenReturn(Optional.of(expPC));
         Optional<PlayerCharacter> actual = pcService.getPC(expId);
         Assert.assertEquals(Optional.of(expPC), actual);
     }
 
     @Test
     public void testAddPC() {
-        Mockito.when(pcService.addPC(expPC)).thenReturn(expPC);
+        Mockito.when(pcRepository.save(expPC)).thenReturn(expPC);
         PlayerCharacter actual = pcService.addPC(expPC);
         Assert.assertEquals(expPC, actual);
     }
 
     @Test
     public void testDeletePC() {
-        doNothing().when(pcService).deletePC(expId);
+        doNothing().when(pcRepository).deleteById(expId);
         pcService.deletePC(expId);
-        verify(pcService, times(1)).deletePC(expId);
+        verify(pcRepository, times(1)).deleteById(expId);
     }
 
 }

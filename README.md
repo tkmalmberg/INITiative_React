@@ -1,37 +1,33 @@
 # INITiative_React
- Final repo (I promise) for my casy study
+ This is an application made to aid adventurers in keeping track of just how soon that troll is going to go berserk on them.
+
+## What is Dungeons and Dragons (D&D)?
+D&D is a table-top role playing game where you create unique characters, and with the help of the Dungeon Master(DM), go on fantastical adventures full of brave heroes, mighty monters, and dastardly villains. The players will play their characters, and the DM will manage the world in which they will adventure, playing the various characters and creatures the players may meet on their journey.
+
+## Why does this exist?
+Sometimes in D&D, the party of spritely adventurers may come across fiends and villains who will wish to fight them to the bitter end. While the adveturers now get to have their fun, fighting the forces of evil, the DM has to keep track of who goes when in combat. This can be tough to manage if there are a bunch of fighters, so I made this tracker to help.
  
  ---
  
 ## CRUD USER STORIES:
-1.	As a GUEST, I want to view all the Monsters.
-2.	As a GUEST, I want to be able to sign up as a USER to get more access to the app.
-3.	As a USER, I want to create a PLAYER CHARACTER.
-4.	As a USER, I want to edit the PLAYER CHARACTER that I have created. 
+1.	As a USER, I want to create a PLAYER CHARACTER.
+2.	As a USER, I want to edit the PLAYER CHARACTER that I have created. 
    *	Name
    *	Race
    *	Class
    *	Ability Scores
    *	Hit Points
-5.	As a USER, I want to delete any PLAYER CHARACTERs that I have created.
-6.	As a USER, I want to create custom MONSTERs to add to my encounters.
-7.	As a USER, I want to edit my custom MONSTERs.
+3.	As a USER, I want to delete any PLAYER CHARACTERs that I have created.
+4.	As a USER, I want to create custom MONSTERs to add to my encounters.
+5.	As a USER, I want to edit my custom MONSTERs.
    *	Name
    *	Hit Points
    *	Ability Scores
-8.	As a USER, I want to create an encounter to keep track of combat between PLAYER CHARACTERs and MONSTERs.
-9.	As a USER, I want to edit the encounter that I have created.
+6.	As a USER, I want to create an encounter to keep track of combat between PLAYER CHARACTERs and MONSTERs.
+7.	As a USER, I want to edit the encounter that I have created.
    *	Name
    *	Combatants in the encounter
-10.	As a USER, I want to delete the encounters I have created.
-11.	As an ADMIN, I want to view USER details.
-   *	First Name
-   *	Last Name
-   *	Email
-   *	Count of ENCOUNTER
-   *	Count of PLAYER CHARACTER
-12.	As an ADMIN, I want to create USERs.
-13.	As an ADMIN, I want to delete USERs.
+8.	As a USER, I want to delete the encounters I have created.
 
 ## COMBAT TRACKER USER STORIES:
 1.	As a USER, when I view my ENCOUNTERs, the combatants are listed on the page.

@@ -1,0 +1,118 @@
+-- Dumping database structure for test
+CREATE DATABASE IF NOT EXISTS `test` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `test`;
+
+-- Dumping structure for table test.creature
+CREATE TABLE IF NOT EXISTS `creature` (
+  `creature_id` bigint(20) NOT NULL,
+  `charisma` int(11) DEFAULT NULL,
+  `constitution` int(11) DEFAULT NULL,
+  `dexterity` int(11) DEFAULT NULL,
+  `intelligence` int(11) DEFAULT NULL,
+  `strength` int(11) DEFAULT NULL,
+  `wisdom` int(11) DEFAULT NULL,
+  PRIMARY KEY (`creature_id`) USING BTREE,
+  CONSTRAINT `FK3u65gq6v0iwytdu9x4oqc8egx` FOREIGN KEY (`creature_id`) REFERENCES `encounter` (`eid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table test.encounter
+CREATE TABLE IF NOT EXISTS `encounter` (
+  `eid` bigint(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `uid` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`eid`) USING BTREE,
+  KEY `FKnp7gcia774ko0vscd887njc6e` (`uid`),
+  CONSTRAINT `FKnp7gcia774ko0vscd887njc6e` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table test.encounter_combatants
+CREATE TABLE IF NOT EXISTS `encounter_combatants` (
+  `eid` bigint(20) NOT NULL,
+  `creature_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`eid`,`creature_id`),
+  CONSTRAINT `FK58rijoqd2xlq57m69hdhtnc5f` FOREIGN KEY (`eid`) REFERENCES `encounter` (`eid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table test.hibernate_sequence
+CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table test.monster
+CREATE TABLE IF NOT EXISTS `monster` (
+  `creature_id` bigint(20) NOT NULL,
+  `charisma` int(11) DEFAULT NULL,
+  `constitution` int(11) DEFAULT NULL,
+  `dexterity` int(11) DEFAULT NULL,
+  `intelligence` int(11) DEFAULT NULL,
+  `strength` int(11) DEFAULT NULL,
+  `wisdom` int(11) DEFAULT NULL,
+  `hit_points` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`creature_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table test.player_character
+CREATE TABLE IF NOT EXISTS `player_character` (
+  `creature_id` bigint(20) NOT NULL,
+  `charisma` int(11) DEFAULT NULL,
+  `constitution` int(11) DEFAULT NULL,
+  `dexterity` int(11) DEFAULT NULL,
+  `intelligence` int(11) DEFAULT NULL,
+  `strength` int(11) DEFAULT NULL,
+  `wisdom` int(11) DEFAULT NULL,
+  `class` varchar(255) DEFAULT NULL,
+  `hit_points` int(11) DEFAULT NULL,
+  `char_level` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `race` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`creature_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table test.user
+CREATE TABLE IF NOT EXISTS `user` (
+  `uid` bigint(20) NOT NULL DEFAULT 0,
+  `admin` bit(1) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `fname` varchar(50) DEFAULT NULL,
+  `lname` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table test.user_encounters
+CREATE TABLE IF NOT EXISTS `user_encounters` (
+  `user_uid` bigint(20) NOT NULL,
+  `encounters_eid` bigint(20) NOT NULL,
+  UNIQUE KEY `UK_bs842jt7lj9a5ygv7blilng58` (`encounters_eid`),
+  KEY `FKmlhn068ner4amammlb4y7bg73` (`user_uid`),
+  CONSTRAINT `FKe956g11o2uvy19arui2d4cenp` FOREIGN KEY (`encounters_eid`) REFERENCES `encounter` (`eid`),
+  CONSTRAINT `FKmlhn068ner4amammlb4y7bg73` FOREIGN KEY (`user_uid`) REFERENCES `user` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table test.user_pcs
+CREATE TABLE IF NOT EXISTS `user_pcs` (
+  `uid` bigint(20) NOT NULL,
+  `creature_id` bigint(20) NOT NULL,
+  KEY `FKeunpo3cxamn13m33ucfcgmjcb` (`creature_id`),
+  KEY `FKdb2agf6mlb65lqqpl4pelaojn` (`uid`),
+  CONSTRAINT `FKdb2agf6mlb65lqqpl4pelaojn` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`),
+  CONSTRAINT `FKeunpo3cxamn13m33ucfcgmjcb` FOREIGN KEY (`creature_id`) REFERENCES `player_character` (`creature_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
