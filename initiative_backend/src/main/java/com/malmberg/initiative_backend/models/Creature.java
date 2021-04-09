@@ -1,11 +1,7 @@
 package com.malmberg.initiative_backend.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Serves as the base class for both Monsters and PlayerCharacters to inherit from

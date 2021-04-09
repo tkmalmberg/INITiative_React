@@ -1,9 +1,7 @@
 package com.malmberg.initiative_backend.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.jmx.export.annotation.ManagedAttribute;
 
 import javax.persistence.*;
 import java.io.Serializable;
