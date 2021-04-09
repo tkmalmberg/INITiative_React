@@ -3,7 +3,6 @@ package com.malmberg.initiative_backend.repositories;
 import com.malmberg.initiative_backend.models.User;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 /**

@@ -1,12 +1,7 @@
 package com.malmberg.initiative_backend.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
 
 /**
  * The PlayerCharacter class models the player character in the
