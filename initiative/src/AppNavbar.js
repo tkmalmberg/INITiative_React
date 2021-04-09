@@ -33,12 +33,12 @@ export default class AppNavbar extends Component {
                 <Nav className="ml-auto" navbar>
                     <NavItem>
                         <NavLink href={"/register"}>
-                            {currentUser ? <span></span> : <span>Register</span>}
+                            {currentUser ? <span>{currentUser.email}</span> : <span>Register</span>}
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink href={"/login"}>
-                            {sessionStorage.getItem("currentUser") ? <span>{currentUser.email}</span> : <span>Sign In</span>}
+                            {currentUser ? <span>Logout</span> : <span>Sign In</span>}
                         </NavLink>
                     </NavItem>
                     <NavItem>

@@ -6,6 +6,15 @@ import { Link } from 'react-router-dom';
 class Login extends Component {
 
     emptyUser = {
+        id: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        pass: '',
+        admin: ''
+    }
+
+    emptyCredentials = {
         email: '',
         pass: ''
     }
@@ -13,7 +22,8 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: this.emptyUser,
+            user: null,
+            creds: this.emptyCredentials,
             isLoading: false
         }
         this.handleChange = this.handleChange.bind(this);
@@ -25,30 +35,27 @@ class Login extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let user = {...this.state.user};
-        user[name] = value;
-        this.setState({user});
+        let creds = {...this.state.creds};
+        creds[name] = value;
+        this.setState({creds});
     }
 
     handleLogin(e) {
         e.preventDefault();
         this.setState({isLoading: true})
-        const {user} = this.state
+        const {creds} = this.state
         fetch('/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(user),
-        }).then(response => response.json())
-        .then(data => this.setState({user: data, isLoading: false}))
-        .then(this.props.history.push('/'))
-        .catch(e => {
-            console.log(e);
-            this.setState({...this.state, isLoading: false});
-        });
-        sessionStorage.setItem("currentUser", JSON.stringify(this.state.user));
+            body: JSON.stringify(creds),
+        }).then(response => response.json(), reject => console.log(reject))
+        // .then(data => console.log(JSON.stringify(data)));
+        .then(data => sessionStorage.setItem("currentUser", JSON.stringify(data)));
+        this.forceUpdate();
+        this.props.history.push('/');
     }
 
     handleLogout(e) {
@@ -56,7 +63,7 @@ class Login extends Component {
     }
 
     render() {
-        const {user} = this.state;
+        const {creds} = this.state;
 
         return (
             <div>
@@ -75,12 +82,12 @@ class Login extends Component {
                                 <FormGroup className="col-md-4 mb-3">
                                     <Label for="email">Email</Label>
                                     <Input type="text" name="email" id="email"
-                                            defautlValue={user.email || ''} onChange={this.handleChange}/>
+                                            defautlValue={creds.email} onChange={this.handleChange}/>
                                 </FormGroup>
                                 <FormGroup className="col-md-4 mb-3">
                                     <Label for="pass">Password</Label>
                                     <Input type="password" name="pass" id="pass"
-                                            defaultValue={user.pass || ''} onChange={this.handleChange}/>
+                                            defaultValue={creds.password} onChange={this.handleChange}/>
                                 </FormGroup>
                                 <FormGroup className="col-md-4 mb-3">
                                     <Button color="primary" type="submit">Login</Button>{' '}
