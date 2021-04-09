@@ -54,7 +54,7 @@ class Login extends Component {
         }).then(response => response.json(), reject => console.log(reject))
         // .then(data => console.log(JSON.stringify(data)));
         .then(data => sessionStorage.setItem("currentUser", JSON.stringify(data)));
-        this.forceUpdate();
+        
         this.props.history.push('/');
     }
 
