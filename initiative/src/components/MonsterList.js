@@ -3,7 +3,7 @@
 // This seems to be a very general way of structuring a React Component
 
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
+import { Button, Container, Table } from 'reactstrap';
 import AppNavbar from '../AppNavbar';
 import { Link } from 'react-router-dom';
 
@@ -53,10 +53,7 @@ class MonsterList extends Component {
                 <td>{monster.wisdom}</td>
                 <td>{monster.charisma}</td>
                 <td>
-                    <ButtonGroup>
-                        <Button size="sm" color="primary" tag={Link} to={"/monster/" + monster.id}>Edit</Button>
-                        <Button size="sm" color="danger" onClick={() => this.remove(monster.id)}>Delete</Button>
-                    </ButtonGroup>
+                    <Button size="sm" color="primary" tag={Link} to={"/monster/" + monster.id}>Edit</Button>
                 </td>
             </tr>
         });
@@ -80,7 +77,7 @@ class MonsterList extends Component {
                                 <th width="5%">INT</th>
                                 <th width="5%">WIS</th>
                                 <th width="5%">CHA</th>
-                                <th width="10%">Actions</th>
+                                <th width="10%"></th>
                             </tr>
                         </thead>
                         <tbody>

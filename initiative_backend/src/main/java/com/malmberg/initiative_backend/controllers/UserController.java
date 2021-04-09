@@ -18,8 +18,8 @@ import java.util.Optional;
 /**
  * Controller that manages requests that have to do with User models
  */
-@Controller // This means that this class is a Controller
-@RequestMapping(path="/api") // This means URL's start with /user (after Application path)
+@Controller
+@RequestMapping(path="/api")
 public class UserController {
 
     /**

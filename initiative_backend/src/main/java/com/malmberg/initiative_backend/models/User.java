@@ -49,12 +49,12 @@ public class User implements Serializable {
      * Password of the User
      */
     @Column(name="password", nullable=false, length=50)
-    private @JsonIgnore String pass;
+    private String pass;
 
     /**
      * Admin Status of the User
      */
-    @Column(name="admin", nullable=false)
+    @Column(name="admin")
     private @JsonIgnore boolean admin;
 
 //    @OneToMany(mappedBy="owner")
@@ -80,13 +80,11 @@ public class User implements Serializable {
      * Constructor for the User class
      * @param email User's email
      * @param pass User's password
-     * @param admin User's admin status
      */
-    public User(String email, String pass, boolean admin) {
+    public User(String email, String pass) {
         super();
         this.email = email;
         this.pass = pass;
-        this.admin = admin;
     }
 
     /**
