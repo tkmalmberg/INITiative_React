@@ -18,7 +18,7 @@ export default class AppNavbar extends Component {
     render() {
         const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
-        return <Navbar color="dark" dark expand="md">
+        return <Navbar style={{backgroundColor: '#ae6363'}} dark expand="md">
             <NavbarBrand tag={Link} to="/">INITiative</NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>

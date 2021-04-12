@@ -51,11 +51,12 @@ class Login extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(creds),
-        }).then(response => response.json(), reject => console.log(reject))
+        }).then(response => response.json())
+        .catch(() => console.log("reject"))
         // .then(data => console.log(JSON.stringify(data)));
-        .then(data => sessionStorage.setItem("currentUser", JSON.stringify(data)));
+        .then(data => sessionStorage.setItem("currentUser", JSON.stringify(data)))
+        .then(this.props.history.push('/'));
         
-        this.props.history.push('/');
     }
 
     handleLogout(e) {

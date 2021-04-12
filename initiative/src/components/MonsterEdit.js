@@ -127,13 +127,13 @@ class MonsterEdit extends Component {
                     </div>
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button className="float-right" color="danger"  
-                                onClick={() => this.remove(item.id)}>Delete</Button>{' '}
                         
                         {!item.name ? 
                             <Button color="secondary" tag={Link} to="/monsters" 
                                 onClick={() => item.name ? console.log('cancelled') : this.remove(item.id)}>Cancel</Button>
-                            : <div></div>}
+                            : 
+                            <Button className="float-right" color="danger"  
+                                onClick={() => this.remove(item.id)}>Delete</Button>}
                         
                     </FormGroup>
                 </Form>

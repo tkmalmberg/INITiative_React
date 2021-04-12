@@ -56,7 +56,7 @@ class PCList extends Component {
                 <td>
                     <ButtonGroup>
                         <Button size="sm" color="primary" tag={Link} to={"/pc/" + pc.id}>Edit</Button>
-                        <Button size="sm" color="danger" onClick={() => this.remove(pc.id)}>Delete</Button>
+                        {/* <Button size="sm" color="danger" onClick={() => this.remove(pc.id)}>Delete</Button> */}
                     </ButtonGroup>
                 </td>
             </tr>

@@ -39,10 +39,6 @@ class PCEdit extends Component {
         }
     }
 
-    // Not entirely sure what this does haha
-    // we'll see I guess
-    // UPDATE -> Even after running and messing around, still don't know what it does.
-    //           I'm going to leave it here, because it seems important.
     handleChange(event) {
         const target = event.target;
         const value = target.value;
@@ -68,13 +64,14 @@ class PCEdit extends Component {
     }
 
     async remove(id) {
-        await fetch(`api/pc/${id}`, {
+        await fetch(`/api/pc/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
-        })
+        });
+        this.props.history.push('/pcs');
     }
 
     render() {
@@ -143,8 +140,14 @@ class PCEdit extends Component {
                     </div>
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/pcs" 
+
+                        {!item.name ?
+                            <Button color="secondary" tag={Link} to="/pcs" 
                                 onClick={() => item.name ? console.log('cancelled') : this.remove(item.id)}>Cancel</Button>
+                            : 
+                            <Button className="float-right" color="danger"  
+                                onClick={() => this.remove(item.id)}>Delete</Button>}
+                        
                     </FormGroup>
                 </Form>
             </Container>
